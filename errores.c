@@ -1,3 +1,9 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 #include <stdio.h>
 #include <windows.h>    //Biblioteca para mostrar colores
 #include "errores.h"
@@ -37,6 +43,6 @@ void errorArchivo(char *archivo)
 void errorTamanyo(int *numero)
 {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), ROJO);
-    fprintf(stderr, "ERROR. El tamanyo %d esta fuera de rango!\n", numero);
+    fprintf(stderr, "ERROR. El tamanyo %d esta fuera de rango!\n", *numero);
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BLANCO);
 }

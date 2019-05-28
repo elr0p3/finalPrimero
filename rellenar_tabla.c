@@ -1,3 +1,9 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -28,7 +34,7 @@ void pedirNumeroCC(int *numero, char *cadena, int minimo)
         printf("\nIntroduce el numero que deseas de %s: ", cadena);
         fflush(stdin);
         scanf("%d", numero);
-
+        
         if(*numero < minimo)
             errorPosicionCC(numero);
     }while(*numero < minimo);
@@ -63,7 +69,7 @@ void pedirNombreCarpetas(info_carpetas *carp, int *long_carp, int num_carp)
 void carpetasExistentes(info_carpetas *carp, int *num_carp)
 {
     int i = 0, j = 0;
-
+    
     for(i = 0; i < (*num_carp); i++){
         printf("Inserte [ %d ] para acceder a la carpeta [ ", carp[i].tipo);
         for(j = 0; j < carp[i].contenido.longitud; j++)
@@ -108,7 +114,7 @@ void pedirNombreCorreos(info_correos *corr, int *long_corr, int total_corr)
 
                 default:
                     errorComandoDesconocido();
-            }
+            }        
         }while(corr[i].leido != ' ' && corr[i].leido != 'X');
         if(corr[i].contenido.longitud > *long_corr)//2. En caso de que la longitud del nuevo nombre es mayor que el mayor actual
             *long_corr = corr[i].contenido.longitud;
@@ -136,7 +142,7 @@ void meterCorreosACarpetas(info_carpetas *carp, info_correos *corr, int num_carp
             printf(" ]: ");
             fflush(stdin);
             scanf("%d", &(corr[i].tipo_carpeta));
-
+            
             if(corr[i].tipo_carpeta < 0 || corr[i].tipo_carpeta >= num_carp)
                 errorPosicionCC(&(corr[i].tipo_carpeta));
         }while(corr[i].tipo_carpeta < 0 || corr[i].tipo_carpeta >= num_carp);

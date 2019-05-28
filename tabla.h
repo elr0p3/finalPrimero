@@ -1,3 +1,16 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/* 
+ * File:   funciones.h
+ * Author: r0p3
+ *
+ * Created on 25 de mayo de 2019, 20:21
+ */
+
 #ifndef TABLA_H
 #define TABLA_H
 
@@ -42,7 +55,7 @@ void liberar(texto *, info_carpetas *, int, info_correos *, int);
 /*Parte dedicada a guardar las carpetas y los correos en archivos*/
 void guardarCarpetas(info_carpetas *, int);
 void guardarCorreos(info_carpetas *, info_correos *, int, int);
-info_carpetas * eliminarCarpetas(info_carpetas *, int *);
+info_carpetas * eliminarCarpetas(info_carpetas *, int *, int*);
 
 
 /*Parte dedicada a imprimir por pantalla la tabla con la informacion obtenda de las funciones anteriores*/
@@ -56,3 +69,4 @@ void imprimirCarpetasRestantes(int, int, int *, int, int, info_carpetas *);
 void imprimirCorreosRestantes(int, int, int, int , int *, int, int, info_correos *);
 
 #endif /* TABLA_H */
+

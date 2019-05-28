@@ -1,3 +1,16 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/* 
+ * File:   main.c
+ * Author: r0p3
+ *
+ * Created on 25 de mayo de 2019, 20:19
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "tabla.h"
@@ -28,11 +41,11 @@ int main(int argc, char** argv)
     char repetir = 'N';           //Caracter que nos servirá para decidir reimprimir una tabla o no
     char eliminar_carp = 'N';
     char eliminar_corr = 'N';
-
+    
     pedirNombreUsuario(&usuario);
     imprimirEncabezadoInicial(simbolos_simples, &usuario);
     imprimirEncabezadoInicial(simbolos_dobles, &usuario);
-
+    
     pedirNumeroCC(&num_carp, "carpetas (minimo 1)", MINCARP);
     carpetas = (info_carpetas *) malloc(num_carp * sizeof(info_carpetas));
     printf("\n\n");
@@ -40,7 +53,7 @@ int main(int argc, char** argv)
     guardarCarpetas(carpetas, num_carp);
     printf("\n\n");
     pedirNumeroCC(&total_corr, "correos (minimo 0)", MINCORR);
-
+    
     if(total_corr > 0){ //1. En caso de que haya correos que usar
         correos = (info_correos *) malloc(total_corr * sizeof(info_correos));
         printf("\n");
@@ -49,7 +62,7 @@ int main(int argc, char** argv)
         meterCorreosACarpetas(carpetas, correos, num_carp, total_corr);
         guardarCorreos(carpetas, correos, num_carp, total_corr);
     }
-
+    
     do{ //Bucle que nos permite reimprimir, o no, una tabla
       tipoLinea(&usuario, carpetas, correos, simbolos_simples, simbolos_dobles, num_carp, long_carp, long_corr);
 
@@ -60,7 +73,7 @@ int main(int argc, char** argv)
             if(repetir != 'S' && repetir != 's' && repetir != 'N' && repetir != 'n')
                 //1. Se activa en caso de NO introducir un caracter para continuar o terminar el programa
                 errorComandoDesconocido();
-
+            
             do{
                 printf("\n\nQuieres quitar alguna carpeta? [ S / N ]: ");
                 fflush(stdin);
@@ -69,19 +82,19 @@ int main(int argc, char** argv)
                 {
                     case 'S':
                     case 's':
-                        carpetas = eliminarCarpetas(carpetas, &num_carp);
+                        carpetas = eliminarCarpetas(carpetas, &num_carp, &total_corr);
                         break;
-
+                        
                     case 'N':
                     case 'n':
                         break;
-
+                        
                     default:
                         errorComandoDesconocido();
                 }
-
+                    
             }while(eliminar_carp != 'S' && eliminar_carp != 's' && eliminar_carp != 'N' && eliminar_carp != 'n');
-
+            
             /*do{
                 printf("\n\nQuieres quitar algun correo? [ S / N ]: ");
                 fflush(stdin);
@@ -92,21 +105,21 @@ int main(int argc, char** argv)
                     case 's':
                         correos = ;
                         break;
-
+                        
                     case 'N':
                     case 'n':
                         break;
-
+                        
                     default:
                         errorComandoDesconocido();
                 }
-
+                
             }while(eliminar_corr != 'S' && eliminar_corr != 's' && eliminar_corr != 'N' && eliminar_corr != 'n');*/
-
+            
         }while (repetir != 'S' && repetir != 's' && repetir != 'N' && repetir != 'n');
 
     }while(repetir == 'S' || repetir == 's');
-
+    
     liberar(&usuario, carpetas, num_carp, correos, total_corr);
     return (EXIT_SUCCESS);
 }
@@ -124,7 +137,7 @@ void tipoLinea(texto *user, info_carpetas *carp, info_correos *corr, int *simple
         printf("\n\nQue tipo de linea quieres utilizar, simple o doble? [ S / D ]: ");
         fflush(stdin);
         scanf("%c", &elecc_simbol);
-
+        
         switch (elecc_simbol)
         {
             case 'S':   //1.A Se activa si queremos imprimir una tabla con lineas SIMPLES
@@ -133,18 +146,18 @@ void tipoLinea(texto *user, info_carpetas *carp, info_correos *corr, int *simple
                 imprimirEncabezado(long_total, long_carp, long_corr, num_carp, carp[elecc_carp].numero_correos, simples, elecc_carp, ult_carp, user, carp);
                 imprimirCeldasCC(num_carp, carp[elecc_carp].numero_correos, long_total, long_carp, long_corr, simples, elecc_carp, ult_carp, carp, corr);
                 break;
-
+            
             case 'D':   //1.B Se activa si queremos imprimir una tabla con lineas DOBLES
             case 'd':
                 imprimirInfoCarp(carp, num_carp, &elecc_carp);
                 imprimirEncabezado(long_total, long_carp, long_corr, num_carp, carp[elecc_carp].numero_correos, dobles, elecc_carp, ult_carp, user, carp);
                 imprimirCeldasCC(num_carp, carp[elecc_carp].numero_correos, long_total, long_carp, long_corr, dobles, elecc_carp, ult_carp, carp, corr);
                 break;
-
+                
             default:    //1.C Se activa si caracter introducido no es para entrar en las otras 2 condiciones
                 errorComandoDesconocido();
         }
-
+        
     }while (elecc_simbol != 'S' && elecc_simbol != 's' && elecc_simbol != 'D' && elecc_simbol != 'd');
 }
 
@@ -152,7 +165,7 @@ void tipoLinea(texto *user, info_carpetas *carp, info_correos *corr, int *simple
 void imprimirInfoCarp(info_carpetas *carp, int num_carp, int *elecc_carp)
 {
     int i = 0, j = 0;
-
+    
     printf("\nIntroduce el contenido de la carpeta que quieras ver:\n");
     /*for(i = 0; i < num_carp; i++){
         printf("Inserte [ %d ] para acceder a la carpeta [ ", carp[i].tipo);
@@ -165,7 +178,7 @@ void imprimirInfoCarp(info_carpetas *carp, int num_carp, int *elecc_carp)
     do{
         printf("\nIntroduce el numero de la carpeta: ");
         scanf("%d", elecc_carp);
-
+        
         if(*elecc_carp < 0 || *elecc_carp >= num_carp){ //En caso de que la carpeta seleccionada no exista
             errorAccederCarp(elecc_carp);
         }
