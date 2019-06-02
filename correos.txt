@@ -1,0 +1,50 @@
+2: :unio
+0: :no esta leido
+0:X:mec
+1:X:tionto
+4: :tres cientosmil millones
+2:X:de subnormales
+1: :amen
+2:X:jesucristo
+2:X:eres mu' tonto
+0:X:mec
+1:X:a
+12: :tonto de los cojones
+13: :anda que tu desgraciao
+13:X:ni hablar de ti...
+14:X:mierda, lo lei
+16: :gilipichis
+19: :tonto
+19:X:tu mas
+19:X:degraciao
+1: :a
+0:X:b
+0:X:no se que mas poner
+1: :correo 0
+0:X:correo 2
+0:X:mec
+1: :111
+0:X:222
+0: :33333
+1: :s
+1:X:n
+0: :mecagondioo0s
+1: :peneee
+2: :no se que poner en el titulo
+0:X:mec
+0:X:tonto de los cojones
+1: :s
+1:X:n
+0:X:m
+1: :tonto
+2:X:mec
+2:X:gilipichis
+0: :mola
+0: :mec
+0:X:n
+0: :mola
+0: :primi
+0:X:segundin
+32: :meme
+33: :mec
+33:X:moco

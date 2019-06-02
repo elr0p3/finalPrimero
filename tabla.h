@@ -28,7 +28,6 @@ typedef struct carpeta{
   texto contenido;      //Llamada a estructura para guardar los nombres y longitudes de las carpetas
   int numero_correos;   //Guarda cuantos correos hay en la carpeta correspondiente
   int tipo;             //Indica la posicion de la carpeta
-  texto archivo;
   char eliminar;
 }info_carpetas;
 
@@ -47,14 +46,19 @@ void carpetasExistentes(info_carpetas *, int *);
 /*Parte dedicada a obtener la informacion de las carpetas, correos y usuario; con uso de la memoria dinamica*/
 void pedirNombreUsuario(texto *);
 void pedirNumeroCC(int *, char *, int);
-void pedirNombreCarpetas(info_carpetas *, int *, int);
-void pedirNombreCorreos(info_correos *, int *, int);
-void meterCorreosACarpetas(info_carpetas *, info_correos *, int, int);
+void pedirNombreCarpetas(info_carpetas *, int *, int, int);
+void pedirNombreCorreos(info_correos *, int *, int, int);
+void meterCorreosACarpetas(info_carpetas *, info_correos *, int, int, int);
 void liberar(texto *, info_carpetas *, int, info_correos *, int);
 
 /*Parte dedicada a guardar las carpetas y los correos en archivos*/
-void guardarCarpetas(info_carpetas *, int);
-void guardarCorreos(info_carpetas *, info_correos *, int, int);
+int obtenerCarpExistentes(int);
+int obtenerCorrExistentes(int);
+info_carpetas * cargarDatosCarpetas(info_carpetas *, int, int *);
+info_correos * cargarDatosCorreos(info_carpetas *, info_correos *, int, int *);
+void guardarCarpetas(info_carpetas *, int, int);
+void guardarCorreos(info_correos *, int, int, int);
+
 info_carpetas * eliminarCarpetas(info_carpetas *, int *, int*);
 
 

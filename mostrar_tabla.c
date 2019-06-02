@@ -85,14 +85,14 @@ void textoCarpetas(int barra, int long_carp, int long_nombr, int tipo_carp, int 
     int i = 0;
     
     printf("%c", barra);
-    if(tipo_carp == elecc_carp)   SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), VERDE);
+    if(tipo_carp == elecc_carp)    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), VERDE);
     for(i = 0; i < long_carp; i++){
         if(i < long_nombr)  printf("%c", nombre[i]);
         else                printf(" ");
     }
     //printf("%-*s", long_carp, nombre);
     
-    if(tipo_carp == elecc_carp)   SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BLANCO);
+    if(tipo_carp == elecc_carp)    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BLANCO);
     printf("%c", barra);
 }
 
@@ -104,8 +104,9 @@ void textoCorreos(int barra, int long_corr, int elecc_carp, int *ult_corr, info_
     do{
         //*ult_corr += 1; //No utilizo el atajo ++ ya que no funciona 
         (*ult_corr)++;      //Suma +1 a la posicion del ultimo correo para no volverlo a imprimirlo 
-        if(corr[*ult_corr].tipo_carpeta == elecc_carp){ /*Como los correos estan es su propia estructura, esta condicion verifica
-                                                        que la carpeta a la que pertenecen los correos es la que se ha seleccionado para imprimir*/
+        if(corr[*ult_corr].tipo_carpeta == elecc_carp){ 
+            /*Como los correos estan es su propia estructura, esta condicion verifica
+            que la carpeta a la que pertenecen los correos es la que se ha seleccionado para imprimir*/
             for(j = 0; j < long_corr; j++){
                 if(j < corr[*ult_corr].contenido.longitud)  printf("%c", corr[*ult_corr].contenido.nombre[j]);
                 else                                        printf(" ");
@@ -232,7 +233,7 @@ void imprimirCorreosRestantes(int dif_num_carp_y_corr, int long_total, int long_
         textoCorreos(simbolos[1], long_corr, elecc_carp, &ult_corr, corr);
         /*1_    Parte encargada de imprimir los espacios y laterales, para darle altura a las celdas*/
 
-        if (i !=   dif_num_carp_y_corr- 1)     //1.A Se activa si NO estamos en la ultima linea a imprimir
+        if (i != dif_num_carp_y_corr - 1)     //1.A Se activa si NO estamos en la ultima linea a imprimir
             imprimirLineas(simbolos[11], simbolos[0], simbolos[11], simbolos[7], simbolos[10], simbolos[9], simbolos[11], long_total, long_carp, long_corr);
         else                                            //1.B Se activa si estamos en la ultima linea a imprimir
             imprimirLineas(simbolos[11], simbolos[0], simbolos[11], simbolos[3], simbolos[8], simbolos[4], simbolos[11], long_total, long_carp, long_corr);

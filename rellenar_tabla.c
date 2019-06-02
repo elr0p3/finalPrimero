@@ -31,7 +31,7 @@ void pedirNombreUsuario(texto *user)
 void pedirNumeroCC(int *numero, char *cadena, int minimo)
 {/*Funcion para pedir el numero de carpetas*/
     do{
-        printf("\nIntroduce el numero que deseas de %s: ", cadena);
+        printf("\nIntroduce el numero que deseas %s: ", cadena);
         fflush(stdin);
         scanf("%d", numero);
         
@@ -41,12 +41,12 @@ void pedirNumeroCC(int *numero, char *cadena, int minimo)
 }
 
 
-void pedirNombreCarpetas(info_carpetas *carp, int *long_carp, int num_carp)
+void pedirNombreCarpetas(info_carpetas *carp, int *long_carp, int num_carp, int inicio)
 {/*Funcion para darle nombre a las carpetas*/
     char introducir[INTRODUCIR];    //String para almacenar los nombres de las carpetas
     int i = 0;
 
-    for (i = 0; i < num_carp; i++){/*Bucle que sigue hasta llegar al numero de carpetas*/
+    for (i = inicio; i < num_carp; i++){/*Bucle que sigue hasta llegar al numero de carpetas*/
         printf("Introduce el nombre de la carpeta %d: ", i);
         fflush(stdin);
         gets(introducir);
@@ -71,7 +71,7 @@ void carpetasExistentes(info_carpetas *carp, int *num_carp)
     int i = 0, j = 0;
     
     for(i = 0; i < (*num_carp); i++){
-        printf("Inserte [ %d ] para acceder a la carpeta [ ", carp[i].tipo);
+        printf("Inserte [ %d ] para acceder a la carpeta [ ", i);
         for(j = 0; j < carp[i].contenido.longitud; j++)
             printf("%c", carp[i].contenido.nombre[j]);
         printf(" ]\n");
@@ -80,12 +80,12 @@ void carpetasExistentes(info_carpetas *carp, int *num_carp)
 }
 
 
-void pedirNombreCorreos(info_correos *corr, int *long_corr, int total_corr)
+void pedirNombreCorreos(info_correos *corr, int *long_corr, int max_corr, int inicio)
 {/*Funcion que nos permite introducir el nombre de los correos*/
     char introducir[2 * INTRODUCIR];    //String para introducir los nombres de los correos
     int  i = 0, j = 0;
 
-    for(i = 0; i < total_corr; i++){
+    for(i = inicio; i < max_corr; i++){
         do{
             printf("\nIntroduce el nombre del correo %d: ", i);
             fflush(stdin);
@@ -122,19 +122,14 @@ void pedirNombreCorreos(info_correos *corr, int *long_corr, int total_corr)
 }
 
 
-void meterCorreosACarpetas(info_carpetas *carp, info_correos *corr, int num_carp, int total_corr)
+void meterCorreosACarpetas(info_carpetas *carp, info_correos *corr, int max_carp, int max_corr, int inicio_corr)
 {/*Funcion que nos permite codificar los correos, para que pertenezcan a la carpeta con el mismo numero*/
     int i = 0, j = 0;
 
     printf("Introduce los correos en carpetas:\n");
-    /*for(i = 0; i < num_carp; i++){
-        printf("Inserte [ %d ] para acceder a la carpeta [ ", carp[i].tipo);
-        for(j = 0; j < carp[i].contenido.longitud; j++)
-            printf("%c", carp[i].contenido.nombre[j]);
-        printf(" ]\n");
-    }*/
-    carpetasExistentes(carp, &num_carp);
-    for(i = 0; i < total_corr; i++){
+    carpetasExistentes(carp, &max_carp);
+    
+    for(i = inicio_corr; i < max_corr; i++){
         do{
             printf("\nCorreo [ ");
             for(j = 0; j < corr[i].contenido.longitud; j++)
@@ -143,9 +138,10 @@ void meterCorreosACarpetas(info_carpetas *carp, info_correos *corr, int num_carp
             fflush(stdin);
             scanf("%d", &(corr[i].tipo_carpeta));
             
-            if(corr[i].tipo_carpeta < 0 || corr[i].tipo_carpeta >= num_carp)
+            if(corr[i].tipo_carpeta < 0 || corr[i].tipo_carpeta >= max_carp)
                 errorPosicionCC(&(corr[i].tipo_carpeta));
-        }while(corr[i].tipo_carpeta < 0 || corr[i].tipo_carpeta >= num_carp);
+        }while(corr[i].tipo_carpeta < 0 || corr[i].tipo_carpeta >= max_carp);
+        
         carp[corr[i].tipo_carpeta].numero_correos++;
     }
 }
@@ -160,7 +156,7 @@ void liberar(texto *user, info_carpetas *carp, int num_carp, info_correos *corr,
         free(corr[i].contenido.nombre);
     for (i = 0; i < num_carp; i++)
         free(carp[i].contenido.nombre);
-    free(user);
+    //free(user);
     free(corr);
     free(carp);
 }
