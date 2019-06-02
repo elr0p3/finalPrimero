@@ -239,7 +239,7 @@ int main(int argc, char** argv)
     
     if(datos_antiguos == 'N' || datos_antiguos == 'n'){ //En caso de que no se haya elegido recargar los datos antiguos, para guardalos en ficheros
         guardarCarpetas(carpetas, total_carp, INICIO);
-        guardarCorreos(correos, total_corr, INICIO, exist_corr);
+        guardarCorreos(correos, total_corr, INICIO, exist_carp);
     }
     liberar(&usuario, carpetas, total_carp, correos, total_corr);
     return (EXIT_SUCCESS);
