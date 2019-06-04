@@ -17,6 +17,7 @@
 
 #define INTRODUCIR 50   //Numero que indica la longitud de unos arrays, para introducir texto
 #define LONG_DER 3      //Numero constante que determina la longitud de las celdas que indican si el correo esta leido
+#define INICIO 0
 
 
 typedef struct cadena{
@@ -35,6 +36,7 @@ typedef struct correo{
   texto contenido;      //Llamada a estructura para guardar los nombres y longitudes de los correos
   char leido;           //Marca si el correo esta leido o no
   int tipo_carpeta;     //Indica en que carpeta se encentra el correo
+  char eliminar;
 }info_correos;
 
 
@@ -56,10 +58,14 @@ int obtenerCarpExistentes(int);
 int obtenerCorrExistentes(int);
 info_carpetas * cargarDatosCarpetas(info_carpetas *, int, int *);
 info_correos * cargarDatosCorreos(info_carpetas *, info_correos *, int, int *);
+void imprimirCarpFich(FILE *, info_carpetas *, int, int);
 void guardarCarpetas(info_carpetas *, int, int);
+void imprimirCorrFich(FILE *, info_correos *, int, int, int);
 void guardarCorreos(info_correos *, int, int, int);
-
-info_carpetas * eliminarCarpetas(info_carpetas *, int *, int*);
+int obtenerCarpRstnts(info_carpetas *, int);
+info_carpetas * eliminarCarpetas(info_carpetas *, info_correos *, int *, int, int, int *);
+info_correos * eliminarCorreos(info_correos *, int *, int);
+void finalGuardarDatos(info_carpetas *, info_correos *, int, int, int, int, char);
 
 
 /*Parte dedicada a imprimir por pantalla la tabla con la informacion obtenda de las funciones anteriores*/
@@ -71,6 +77,7 @@ void imprimirEncabezado(int, int, int, int, int, int *, int, int, texto *, info_
 void imprimirCeldasCC(int, int, int, int, int, int *, int, int, info_carpetas *, info_correos *);
 void imprimirCarpetasRestantes(int, int, int *, int, int, info_carpetas *);
 void imprimirCorreosRestantes(int, int, int, int , int *, int, int, info_correos *);
+
 
 #endif /* TABLA_H */
 

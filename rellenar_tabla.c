@@ -118,6 +118,7 @@ void pedirNombreCorreos(info_correos *corr, int *long_corr, int max_corr, int in
         }while(corr[i].leido != ' ' && corr[i].leido != 'X');
         if(corr[i].contenido.longitud > *long_corr)//2. En caso de que la longitud del nuevo nombre es mayor que el mayor actual
             *long_corr = corr[i].contenido.longitud;
+        corr[i].eliminar = 'N';
     }
 }
 
