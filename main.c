@@ -227,20 +227,20 @@ int main(int argc, char** argv)
                     {
                         case 'Q':   //4.A En caso de querer quitar correos
                         case 'q':
-
+                            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             break;
 
                         case 'A':   //4.B En caso de querer anyadir correos
                         case 'a':
                             pedirNumeroCC(&new_corr, "anyadir de correos", INICIO);
                             if(new_corr > 0){ //.A En caso de que haya correos que usar
-                                correos = (info_correos *) realloc(correos, total_corr * sizeof(info_correos));
+                                correos = (info_correos *) realloc(correos, (total_corr + new_corr) * sizeof(info_correos));
                                 if(datos_antiguos == 'C' || datos_antiguos == 'c'){
                                     pedirNombreCorreos(correos, &long_corr, total_corr, exist_corr);
                                     meterCorreosACarpetas(carpetas, correos, total_carp, total_corr, exist_corr);
                                     guardarCorreos(correos, total_corr, exist_corr, INICIO);
                                     exist_corr = total_corr + new_corr;
-                                } else {//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                } else {
                                     pedirNombreCorreos(correos, &long_corr, (total_corr + new_corr), total_corr);
                                     meterCorreosACarpetas(carpetas, correos, total_carp, (total_corr + new_corr), total_corr);
                                 }
