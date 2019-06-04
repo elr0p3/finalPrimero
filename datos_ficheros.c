@@ -24,7 +24,7 @@ int obtenerCarpExistentes(int exist_carp)
     } else {                //1.B En caso de que haya datos de carpetas
         while(!feof(carpet)){
             fgets(datos, INTRODUCIR, carpet);
-            exist_carp++;  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            exist_carp++;
         }   //Bucle para detectar cuantas carpetas hay almacenados
     }
                 
@@ -45,7 +45,7 @@ int obtenerCorrExistentes(int exist_corr)
     } else {                //1.B En caso de que haya datos de carpetas
         while(!feof(corre)){
             fgets(datos, INTRODUCIR, corre);
-            exist_corr++;  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            exist_corr++;
         }   //Bucle para detectar cuantas carpetas hay almacenados
     }
     
@@ -145,13 +145,11 @@ void guardarCarpetas(info_carpetas *carp, int max_carp, int inicio)
     
     if(carpet == NULL){ //1.A En caso de que la carpeta no exista, la crea e introduce los datos
         carpet = fopen("carpetas.txt", "w");
-        
         imprimirCarpFich(carpet, carp, max_carp, inicio);
         
     } else {            //1.B En caso de que la carpeta exista, anyade los datos
         fclose(carpet);
         carpet = fopen("carpetas.txt", "a");
-        
         imprimirCarpFich(carpet, carp, max_carp, inicio);
     }
     
@@ -178,13 +176,11 @@ void guardarCorreos(info_correos *corr, int max_corr, int inicio, int exist_carp
     
     if(corre == NULL){  //1.A En caso de que la carpeta no exista, la crea e introduce los datos
         corre = fopen("correos.txt", "w");
-        
         imprimirCorrFich(corre, corr, max_corr, inicio, exist_carp);
         
     } else {            //1.B En caso de que la carpeta exista, anyade los datos
         fclose(corre);
         corre = fopen("correos.txt", "a");
-        
         imprimirCorrFich(corre, corr, max_corr, inicio, exist_carp);
     }
     
@@ -314,7 +310,8 @@ void finalGuardarDatos(info_carpetas *carp, info_correos *corr, int total_carp, 
 {
     if(exist_carp > 0){ //.A En caso de que haya datos ya almacenados
         do{
-            printf("\n\nQuieres sobreescribir tus nuevos correo(s) y carpeta(s) [ S / N]: ");
+            printf("\n\nQuieres sobreescribir tus nuevos correo(s) y carpeta(s) [ S / N ]: ");
+            fflush(stdin);
             scanf("%c", &old_data);
             if(old_data == 'S' || old_data == 's'){
                 remove("carpetas.txt");

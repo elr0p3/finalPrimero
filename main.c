@@ -19,7 +19,7 @@
 #define MINCORR 0       //Numero minimo posible para introducir correos
 
 /*
-nooremrme *
+ *
  */
 
 void tipoLinea(texto *, info_carpetas *, info_correos *, int*, int*, int, int, int, int);
@@ -36,9 +36,9 @@ int main(int argc, char** argv)
     info_carpetas *carpetas = NULL;   //Puntero a estructura, para tener con memoria dinamica las carpetas necesarias
     info_correos *correos = NULL;     //Puntero a estructura, para tener con memoria dinamica los correos necesarios
     int exist_carp = 0, new_carp = 0, total_carp = 0, long_carp = 0;         
-    //N. carpetas existentes en fichero / nuevas carpetas / totalidad de carpetas / longitud carpetas
+    //N. carpetas existentes en fichero / nuevas carpetas / N. carpetas en estructura / longitud carpetas
     int exist_corr = 0, new_corr = 0, total_corr = 0, long_corr = 0;         
-    //N. correos existentes en fichero / nuevos correos / totalidad de correos / longitud correos
+    //N. correos existentes en fichero / nuevos correos / N. correos en estructura / longitud correos
     char datos_antiguos = 'N', repetir = 'N', anyadir = 'N';
     //Cargar datos guardados en ficheros / Reimprimir tabla o no / Anyadir carp-corr
     char modif_carp = 'N';
@@ -93,8 +93,10 @@ int main(int argc, char** argv)
                         goto introduce_datos;
                     }
                 }while(anyadir != 'S' && anyadir != 's' && anyadir != 'N' && anyadir != 'n');
-                total_carp = exist_carp + new_carp;
-                total_corr = exist_corr + new_corr;
+                exist_carp += new_carp;
+                total_carp  = exist_carp + new_carp;
+                exist_corr += new_corr;
+                total_corr  = exist_corr + new_corr;
                 break;
             
             case 'B':   //1.B En caso de querer borrar los datos antiguos
@@ -111,7 +113,6 @@ int main(int argc, char** argv)
                             carpetas = (info_carpetas *) malloc(new_carp * sizeof(info_carpetas));
                             printf("\n\n");
                             pedirNombreCarpetas(carpetas, &long_carp, new_carp, INICIO);
-                            //guardarCarpetas(carpetas, new_carp, INICIO);
                             printf("\n\n");
                             pedirNumeroCC(&new_corr, "de correos (minimo 0)", MINCORR);
                             total_corr = new_corr;
@@ -122,7 +123,6 @@ int main(int argc, char** argv)
                                 pedirNombreCorreos(correos, &long_corr, new_corr, INICIO);
                                 printf("\n\n");
                                 meterCorreosACarpetas(carpetas, correos, new_carp, new_corr, INICIO);
-                                //guardarCorreos(correos, new_corr, INICIO);
                             }
                 break;
             
@@ -146,7 +146,7 @@ int main(int argc, char** argv)
                 
                 if((datos_antiguos == 'N' || datos_antiguos == 'n') && exist_carp > 0){
                     do{
-                        printf("Quieres cargar tus datos antiguos [ C / N ]: ");
+                        printf("\n\nQuieres cargar tus datos antiguos [ C / N ]: ");
                         fflush(stdin);
                         scanf("%c", &datos_antiguos);
                         
@@ -196,11 +196,17 @@ int main(int argc, char** argv)
 
                         case 'A':   //3.B En caso de querer anyadir carpetas
                         case 'a':
-                            pedirNumeroCC(&new_carp, "anyadir de carpetas (minimo 1)", MINCARP);
-                            carpetas = (info_carpetas *) realloc(carpetas, (new_carp + total_carp) * sizeof(info_carpetas));
-                            pedirNombreCarpetas(carpetas, &long_carp, (new_carp + total_carp), total_carp);
-                            guardarCarpetas(carpetas, (new_carp + total_carp), total_carp);
-                            total_carp += new_carp;
+                            pedirNumeroCC(&new_carp, "anyadir de carpetas", INICIO);
+                            if(new_carp > 0){
+                                carpetas = (info_carpetas *) realloc(carpetas, (total_carp + new_carp) * sizeof(info_carpetas));
+                                if(datos_antiguos == 'C' || datos_antiguos == 'c'){
+                                    pedirNombreCarpetas(carpetas, &long_carp, (total_carp + new_carp), exist_carp);
+                                    guardarCarpetas(carpetas, (total_carp + new_carp), exist_carp);
+                                    exist_carp = total_carp + new_carp;
+                                } else
+                                    pedirNombreCarpetas(carpetas, &long_carp, (total_carp + new_carp), total_carp);
+                                total_carp += new_carp;
+                            }
                             break;
 
                         case 'N':   //3.C En caso de no querer cambiar nada
@@ -213,8 +219,8 @@ int main(int argc, char** argv)
 
                 }while(modif_carp != 'Q' && modif_carp != 'q' && modif_carp != 'A' && modif_carp != 'a' && modif_carp != 'N' && modif_carp != 'n');
 
-                /*do{
-                    printf("\n\nQuieres mopdificar los correos? [ Quitar / Anyadir / Dejar ] [ Q / A / D ]: ");
+                do{
+                    printf("\n\nQuieres mopdificar los correos? [ Quitar / Anyadir / No ] [ Q / A / N ]: ");
                     fflush(stdin);
                     scanf("%c", &modif_corr);
                     switch (modif_corr)
@@ -226,27 +232,31 @@ int main(int argc, char** argv)
 
                         case 'A':   //4.B En caso de querer anyadir correos
                         case 'a':
-                            pedirNumeroCC(&new_corr, "anyadir de correos (minimo 0)", MINCORR);
-
-                            if(new_corr > 0){ //1. En caso de que haya correos que usar
-                                correos = (info_correos *) realloc(correos, new_corr * sizeof(info_correos));
-                                printf("\n");
-                                pedirNombreCorreos(correos, &long_corr, (new_corr + exist_corr), exist_corr);
-                                printf("\n\n");
-                                meterCorreosACarpetas(carpetas, correos, total_carp, total_corr, exist_corr);
-                                guardarCorreos(correos, (new_corr + exist_corr), exist_corr);
+                            pedirNumeroCC(&new_corr, "anyadir de correos", INICIO);
+                            if(new_corr > 0){ //.A En caso de que haya correos que usar
+                                correos = (info_correos *) realloc(correos, total_corr * sizeof(info_correos));
+                                if(datos_antiguos == 'C' || datos_antiguos == 'c'){
+                                    pedirNombreCorreos(correos, &long_corr, total_corr, exist_corr);
+                                    meterCorreosACarpetas(carpetas, correos, total_carp, total_corr, exist_corr);
+                                    guardarCorreos(correos, total_corr, exist_corr, INICIO);
+                                    exist_corr = total_corr + new_corr;
+                                } else {//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    pedirNombreCorreos(correos, &long_corr, (total_corr + new_corr), total_corr);
+                                    meterCorreosACarpetas(carpetas, correos, total_carp, (total_corr + new_corr), total_corr);
+                                }
+                                total_corr += new_corr;
                             }
                             break;
 
-                        case 'D':   //4.C En caso de no querer cambiar nada
-                        case 'd':
+                        case 'N':   //4.C En caso de no querer cambiar nada
+                        case 'n':
                             break;
 
                         default:    //4.D En caso de pulsar una tecla equivocada
                             errorComandoDesconocido();
                     }
 
-                }while(modif_corr != 'Q' && modif_corr != 'q' && modif_corr != 'A' && modif_corr != 'a' && modif_corr != 'D' && modif_corr != 'd');*/
+                }while(modif_corr != 'Q' && modif_corr != 'q' && modif_corr != 'A' && modif_corr != 'a' && modif_corr != 'N' && modif_corr != 'n');
             }
         }while (repetir != 'S' && repetir != 's' && repetir != 'N' && repetir != 'n');
 
