@@ -223,7 +223,8 @@ int obtenerCarpRstnts(info_carpetas *carp, int total_carp)
 info_carpetas * eliminarCarpetas(info_carpetas *carp, info_correos *corr, int *total_carp, int total_corr, int mtnr_carp, int *mtnr_corr)
 {/*Borra las carpetas de los correos borrados, y edita la estructura dinamica de las carpetas*/
     info_carpetas *auxiliar = NULL;
-    int i = 0, j = 0, k = 0;
+    int i = 0, j = 0, k = 0;           
+    int corr_no_dsplzd = 0;
     *mtnr_corr = total_corr;
     
     auxiliar = (info_carpetas *)malloc(mtnr_carp * sizeof(info_carpetas));
@@ -247,6 +248,15 @@ info_carpetas * eliminarCarpetas(info_carpetas *carp, info_correos *corr, int *t
             free(carp[i].contenido.nombre);
         }
     }
+    
+    for(i = 0; i < (*total_carp); i++){
+        if(carp[i].eliminar == 'S'){
+            for(j = corr_no_dsplzd; j < total_corr; j++){
+                corr[j].tipo_carpeta--;
+            }
+        }
+        corr_no_dsplzd += carp[i].numero_correos;
+    }/*Si no se realiza esto, los correos almacenados en carpetas superiores a los que se han borrado, no cambiarian de posicion*/
 
     carp = (info_carpetas *) realloc(carp, mtnr_carp * sizeof(info_carpetas));
     
@@ -264,9 +274,37 @@ info_carpetas * eliminarCarpetas(info_carpetas *carp, info_correos *corr, int *t
 }
 
 
-int obtenerCorrRstnts()
+int obtenerCorrRstnts(info_carpetas *carp, info_correos *corr, int total_corr)
 {
+    int num_borr = 0;
+    int pscn_borr = 0;
+    int i = 0;
     
+    do{
+        printf("\nIntroduce cuantos correos quieres eliminar: ");
+        scanf("%d", &num_borr);
+        if(num_borr < 0 || num_borr >= total_corr) //1.A En caso de que la carpeta seleccionada no exista
+            errorTamanyo(&num_borr);
+        
+        else if(num_borr > 0){                    //1.B En caso de que haya carpetas que eliminar
+            
+            for(i = 0; i < num_borr; i++){
+                do{
+                    correosExistentes(corr, &total_corr);
+                    printf("\nIntroduce el numero del correo: ");
+                    scanf("%d", &pscn_borr);
+                    if(pscn_borr < 0 || pscn_borr >= total_corr) //2.A En caso de que la carpeta seleccionada no exista
+                        errorAccederCarp(&pscn_borr);
+                    else{                                       //2.B Indica que hay que eliminar la carpeta
+                        corr[pscn_borr].eliminar = 'S';
+                        carp[corr[pscn_borr].tipo_carpeta].numero_correos--;
+                    }
+                }while(pscn_borr < 0 || pscn_borr >= total_corr);
+            }
+        }
+    }while(num_borr < 0 || num_borr >= total_corr);
+    
+    return (total_corr - num_borr);
 }
 
 

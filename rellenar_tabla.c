@@ -66,20 +66,6 @@ void pedirNombreCarpetas(info_carpetas *carp, int *long_carp, int num_carp, int 
 }
 
 
-void carpetasExistentes(info_carpetas *carp, int *num_carp)
-{
-    int i = 0, j = 0;
-    
-    for(i = 0; i < (*num_carp); i++){
-        printf("Inserte [ %d ] para acceder a la carpeta [ ", i);
-        for(j = 0; j < carp[i].contenido.longitud; j++)
-            printf("%c", carp[i].contenido.nombre[j]);
-        printf(" ]\n");
-        //printf("%s ]\n", carp[i].contenido.nombre);
-    }
-}
-
-
 void pedirNombreCorreos(info_correos *corr, int *long_corr, int max_corr, int inicio)
 {/*Funcion que nos permite introducir el nombre de los correos*/
     char introducir[2 * INTRODUCIR];    //String para introducir los nombres de los correos

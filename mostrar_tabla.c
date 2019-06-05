@@ -26,7 +26,36 @@ void imprimirEncabezadoInicial(int *simbolos, texto *user)
 }
 
 
-void imprimirLineas(int ln_hrzntl_A, int ln_hrzntl_B, int esq_izq, int esq_cntrl_izq, int esq_cntrl_der, int esq_der, int final, int long_necesaria, int long_carp, int long_corr)
+void carpetasExistentes(info_carpetas *carp, int *num_carp)
+{
+    int i = 0, j = 0;
+    
+    for(i = 0; i < (*num_carp); i++){
+        printf("Inserte [ %d ] para seleccionar la carpeta [ ", i);
+        for(j = 0; j < carp[i].contenido.longitud; j++)
+            printf("%c", carp[i].contenido.nombre[j]);
+        printf(" ]\n");
+        //printf("%s ]\n", carp[i].contenido.nombre);
+    }
+}
+
+
+void correosExistentes(info_correos *corr, int *num_corr)
+{
+    int i = 0, j = 0;
+    
+    for(i = 0; i < (*num_corr); i++)
+    {
+        printf("Inserte [ %d ] para seleccionar el correo [ ", i);
+        for(j = 0; j < corr[i].contenido.longitud; j++)
+            printf("%c", corr[i].contenido.nombre[j]);
+        printf(" ]\n");
+    }
+}
+
+
+void imprimirLineas(int ln_hrzntl_A, int ln_hrzntl_B, int esq_izq, int esq_cntrl_izq, int esq_cntrl_der,
+                    int esq_der, int final, int long_necesaria, int long_carp, int long_corr)
 {/*Funcion que nos permite imprimir las lineas horizontales que separan las celdas, ya que para imprimirlas hay que seguir el mismo patron*/
     int i = 0;
 
@@ -118,7 +147,8 @@ void textoCorreos(int barra, int long_corr, int elecc_carp, int *ult_corr, info_
 }
 
 
-void imprimirEncabezado(int long_total, int long_carp, int long_corr, int num_carp, int num_corr, int *simbolos, int tipo_corr, int ult_carp, texto *user, info_carpetas *carp)
+void imprimirEncabezado(int long_total, int long_carp, int long_corr, int num_carp, int num_corr, 
+                        int *simbolos, int tipo_corr, int ult_carp, texto *user, info_carpetas *carp)
 {/*Funcion que sirve para imprimir el encabezado de la tabla*/
     int long_usuario = user->longitud - 1;
     
@@ -156,7 +186,8 @@ void imprimirEncabezado(int long_total, int long_carp, int long_corr, int num_ca
 }
 
 
-void imprimirCeldasCC(int num_carp, int num_corr, int long_total, int long_carp, int long_corr, int *simbolos, int elecc_carp, int ult_carp, info_carpetas *carp, info_correos *corr)
+void imprimirCeldasCC(int num_carp, int num_corr, int long_total, int long_carp, int long_corr, 
+                    int *simbolos, int elecc_carp, int ult_carp, info_carpetas *carp, info_correos *corr)
 {/*Funcion que imprime las celdas comunes, ademas de las no comunes segun el numero de carpetas y correos*/
     int numero_peque = 0;       //Variable que permite almacenar el numero mas pequeño ya sea de carpetas o correos
     int dif_num_carp_y_corr = 0;//Variable que determina la diferencia entre el numero de carptes frente al numero de correos

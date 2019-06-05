@@ -43,6 +43,7 @@ typedef struct correo{
 /*Parte encargada de una cierta estetica*/
 void imprimirEncabezadoInicial(int *, texto *);
 void carpetasExistentes(info_carpetas *, int *);
+void correosExistentes(info_correos *, int *);
 
 
 /*Parte dedicada a obtener la informacion de las carpetas, correos y usuario; con uso de la memoria dinamica*/
@@ -64,6 +65,7 @@ void imprimirCorrFich(FILE *, info_correos *, int, int, int);
 void guardarCorreos(info_correos *, int, int, int);
 int obtenerCarpRstnts(info_carpetas *, int);
 info_carpetas * eliminarCarpetas(info_carpetas *, info_correos *, int *, int, int, int *);
+int obtenerCorrRstnts(info_carpetas *, info_correos *, int);
 info_correos * eliminarCorreos(info_correos *, int *, int);
 void finalGuardarDatos(info_carpetas *, info_correos *, int, int, int, int, char);
 
