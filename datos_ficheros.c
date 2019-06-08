@@ -201,10 +201,9 @@ int obtenerCarpRstnts(info_carpetas *carp, int total_carp)
             errorTamanyo(&num_borr);
         
         else if(num_borr > 0){                    //1.B En caso de que haya carpetas que eliminar
-            
+            carpetasExistentes(carp, &total_carp);
             for(i = 0; i < num_borr; i++){
                 do{
-                    carpetasExistentes(carp, &total_carp);
                     printf("\nIntroduce el numero de la carpeta: ");
                     scanf("%d", &pscn_borr);
                     if(pscn_borr < 0 || pscn_borr >= total_carp) //2.A En caso de que la carpeta seleccionada no exista
@@ -224,9 +223,10 @@ info_carpetas * eliminarCarpetas(info_carpetas *carp, info_correos *corr, int *t
 {/*Borra las carpetas de los correos borrados, y edita la estructura dinamica de las carpetas*/
     info_carpetas *auxiliar = NULL;
     int i = 0, j = 0, k = 0;           
-    int corr_no_dsplzd = 0;
+    int *direcciones;
     *mtnr_corr = total_corr;
     
+    direcciones = (int *)malloc(total_corr * sizeof(int));
     auxiliar = (info_carpetas *)malloc(mtnr_carp * sizeof(info_carpetas));
 
     for(i = 0; i < (*total_carp); i++){
@@ -249,15 +249,26 @@ info_carpetas * eliminarCarpetas(info_carpetas *carp, info_correos *corr, int *t
         }
     }
     
+    for(i = 0; i < total_corr; i++){
+        direcciones[i] = corr[i].tipo_carpeta;
+        printf("%d  ", corr[i].tipo_carpeta);
+    }
+    printf("\n");
     for(i = 0; i < (*total_carp); i++){
         if(carp[i].eliminar == 'S'){
-            for(j = corr_no_dsplzd; j < total_corr; j++){
-                corr[j].tipo_carpeta--;
+            for(j = 0; j < total_corr; j++){
+                if(carp[i].tipo <= corr[j].tipo_carpeta)
+                    direcciones[j]--;
             }
         }
-        corr_no_dsplzd += carp[i].numero_correos;
     }/*Si no se realiza esto, los correos almacenados en carpetas superiores a los que se han borrado, no cambiarian de posicion*/
-
+    
+    for(i = 0; i < total_corr; i++){
+        corr[i].tipo_carpeta = direcciones[i];
+        printf("%d  ", corr[i].tipo_carpeta);
+    }
+    printf("\n");
+    
     carp = (info_carpetas *) realloc(carp, mtnr_carp * sizeof(info_carpetas));
     
     for(i = 0; i < mtnr_carp; i++){   //Recoloca los datos almacenados en la auxiliar, a las carpetas
@@ -268,6 +279,7 @@ info_carpetas * eliminarCarpetas(info_carpetas *carp, info_correos *corr, int *t
         carp[i].eliminar            = 'N';
     }
     
+    free(direcciones);
     free(auxiliar);     //Para que no haya problemas al volver a eliminar carpetas
     *total_carp = mtnr_carp;
     return carp;            
@@ -289,8 +301,8 @@ int obtenerCorrRstnts(info_carpetas *carp, info_correos *corr, int total_corr)
         else if(num_borr > 0){                    //1.B En caso de que haya carpetas que eliminar
             
             for(i = 0; i < num_borr; i++){
+                correosExistentes(corr, &total_corr);
                 do{
-                    correosExistentes(corr, &total_corr);
                     printf("\nIntroduce el numero del correo: ");
                     scanf("%d", &pscn_borr);
                     if(pscn_borr < 0 || pscn_borr >= total_corr) //2.A En caso de que la carpeta seleccionada no exista

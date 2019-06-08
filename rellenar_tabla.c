@@ -134,11 +134,10 @@ void meterCorreosACarpetas(info_carpetas *carp, info_correos *corr, int max_carp
 }
 
 
-void liberar(texto *user, info_carpetas *carp, int num_carp, info_correos *corr, int total_corr)
+void liberar(info_carpetas *carp, int num_carp, info_correos *corr, int total_corr)
 {/*Funcion que permite liberar, al final del programa, el espacio reservado por malloc, y evita fallos ¯\_(ツ)_/¯*/
     int i = 0;
 
-    free(user->nombre);
     for(i = 0; i < total_corr; i++)
         free(corr[i].contenido.nombre);
     for (i = 0; i < num_carp; i++)

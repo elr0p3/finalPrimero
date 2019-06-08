@@ -39,6 +39,18 @@ typedef struct correo{
   char eliminar;
 }info_correos;
 
+typedef struct Almacen{
+    info_carpetas *carp;
+    info_correos *corr;
+}almacen;
+
+typedef struct corr_carp_data{
+    int total;      //Numero de correos o carpetas presentes en la estructura dinamica
+    int exist;      //Numero de correos o carpetas presentes en los ficheros
+    int new;        //Numero de correos o carpetas pedidos
+    int longtd;     //Longitud maxima de correos o carpetas
+}datos;
+
 
 /*Parte encargada de una cierta estetica*/
 void imprimirEncabezadoInicial(int *, texto *);
@@ -52,7 +64,7 @@ void pedirNumeroCC(int *, char *, int);
 void pedirNombreCarpetas(info_carpetas *, int *, int, int);
 void pedirNombreCorreos(info_correos *, int *, int, int);
 void meterCorreosACarpetas(info_carpetas *, info_correos *, int, int, int);
-void liberar(texto *, info_carpetas *, int, info_correos *, int);
+void liberar(info_carpetas *, int, info_correos *, int);
 
 /*Parte dedicada a guardar las carpetas y los correos en archivos*/
 int obtenerCarpExistentes(int);

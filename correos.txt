@@ -2,21 +2,15 @@
 0: :no esta leido
 0:X:mec
 1:X:tionto
-4: :tres cientosmil millones
 2:X:de subnormales
 1: :amen
 2:X:jesucristo
-2:X:eres mu' tonto
 0:X:mec
 1:X:a
-12: :tonto de los cojones
-13: :anda que tu desgraciao
-13:X:ni hablar de ti...
-14:X:mierda, lo lei
-16: :gilipichis
-19: :tonto
-19:X:tu mas
-19:X:degraciao
+4: :anda que tu desgraciao
+4:X:ni hablar de ti...
+5:X:mierda, lo lei
+6: :gilipichis
 1: :a
 0:X:b
 0:X:no se que mas poner
@@ -45,56 +39,52 @@
 0: :mola
 0: :primi
 0:X:segundin
-32: :meme
-33: :mec
-33:X:moco
-34: :penee
-34: :tengo poca imaginacion
-34:X:mecagoncristo
-35:X:gilipo
-35:X:aaAaa
-37: :ernesto la chupa
-37: :su8bnormal
-37:X:lOl-LoL
-37:X:aAAa
-39: :primero
-39:X:S.A
-38: :Ernesto lachupa
-39: :eYy
-40: :anyadido
-40:X:segundo anyadido :D
-40: :otra prueba mas
-40:X:otrita
-40:X:mecachis
-41: :tonto de los collons
-41:X:soy muy graciso
-44:X:4
-47: :aibainda
-46: :me duele el ojo derecho, mucho
-46:X:mucho
-48: :primer correo anyadido
-48:X:segundo anyadido
-49: :
-49:X:Xubp
-49:X:bronce
-49: :subsub
-49:X:tonto
-50: :gili1
-50: :gili2
-50:X:gilito
-51: :uno
-51:X:dosn
-51:X:chincho
-53: :carga 1
-53:X:mega carga
-53:X:super mega carga de la poia
-60: :s
-60: :uno
-60:X:dos
-63:X:pene
-63:X:pollo
-64: :prim
-64:X:no
-64:X:chi
-64: :el 98 a ver si chufla
-64:X:eso espero
+11: :tonto de los collons
+11:X:soy muy graciso
+17: :s
+17: :uno
+17:X:dos
+2: :3
+21: :3
+21:X:4
+22: :uno
+15: :tres
+14:X:cuatro
+3: :cinco
+23:X:jodo floro
+23: :n
+4: :90
+21:X:92
+16: :otro mas
+24: :q
+24: :w
+23: :e
+23:X:n
+23:X:m
+25: :tu
+25:X:que
+26:X:hacesm
+12: :tonto
+25:X:de
+26:X:los
+6: :cojines
+29: :oye
+27:X:babilonia
+28:X:uganda
+28: :pocket monsters
+6: :SQLite
+29: :primer anyadido
+28:X:segundin
+26: :comeme la poia
+32: :oye qye haces
+33: :tu mas
+34:X:Dalas Review
+34: :Vegetta
+33: :87
+34:X:88
+29:X:pene
+35:X:noventa y dos
+36: :oye
+37:X:tu
+37:X:que
+36: :aces
