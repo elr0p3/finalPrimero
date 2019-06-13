@@ -29,19 +29,19 @@ typedef struct carpeta{
   texto contenido;      //Llamada a estructura para guardar los nombres y longitudes de las carpetas
   int numero_correos;   //Guarda cuantos correos hay en la carpeta correspondiente
   int tipo;             //Indica la posicion de la carpeta
-  char eliminar;
+  char eliminar;        //Indica si la carpeta hay, o no, que eliminarla
 }info_carpetas;
 
 typedef struct correo{
   texto contenido;      //Llamada a estructura para guardar los nombres y longitudes de los correos
   char leido;           //Marca si el correo esta leido o no
   int tipo_carpeta;     //Indica en que carpeta se encentra el correo
-  char eliminar;
+  char eliminar;        //Indica si el correo hay, o no, que eliminarlo
 }info_correos;
 
 typedef struct Almacen{
-    info_carpetas *carp;
-    info_correos *corr;
+    info_carpetas *carp;    //Carpetas
+    info_correos *corr;     //Correos
 }almacen;
 
 typedef struct corr_carp_data{
@@ -79,7 +79,7 @@ int obtenerCarpRstnts(info_carpetas *, int);
 info_carpetas * eliminarCarpetas(info_carpetas *, info_correos *, int *, int, int, int *);
 int obtenerCorrRstnts(info_carpetas *, info_correos *, int);
 info_correos * eliminarCorreos(info_correos *, int *, int);
-void finalGuardarDatos(info_carpetas *, info_correos *, int, int, int, int, char);
+void finalGuardarDatos(info_carpetas *, info_correos *, int, int, int, int);
 
 
 /*Parte dedicada a imprimir por pantalla la tabla con la informacion obtenda de las funciones anteriores*/

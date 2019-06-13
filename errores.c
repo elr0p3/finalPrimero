@@ -46,3 +46,10 @@ void errorTamanyo(int *numero)
     fprintf(stderr, "ERROR. El tamanyo %d esta fuera de rango!\n", *numero);
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BLANCO);
 }
+
+void errorSinDatos()
+{
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), ROJO);
+    fprintf(stderr, "ERROR. No hay ficheros de los cuales extraer datos, o no hay datos en los ficheros!\n");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BLANCO);
+}

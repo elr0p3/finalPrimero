@@ -39,52 +39,52 @@
 0: :mola
 0: :primi
 0:X:segundin
-11: :tonto de los collons
-11:X:soy muy graciso
-17: :s
-17: :uno
-17:X:dos
+9: :tonto de los collons
+9:X:soy muy graciso
+14: :s
+14: :uno
+14:X:dos
 2: :3
-21: :3
-21:X:4
-22: :uno
-15: :tres
-14:X:cuatro
+17: :3
+18: :uno
+12: :tres
+11:X:cuatro
 3: :cinco
-23:X:jodo floro
-23: :n
+19:X:jodo floro
+19: :n
 4: :90
-21:X:92
-16: :otro mas
-24: :q
-24: :w
-23: :e
-23:X:n
-23:X:m
-25: :tu
-25:X:que
-26:X:hacesm
-12: :tonto
-25:X:de
-26:X:los
+17:X:92
+13: :otro mas
+20: :q
+20: :w
+19: :e
+19:X:n
+19:X:m
+21: :tu
+21:X:que
+22:X:hacesm
+22:X:los
 6: :cojines
-29: :oye
-27:X:babilonia
-28:X:uganda
-28: :pocket monsters
+23:X:babilonia
+24:X:uganda
+24: :pocket monsters
 6: :SQLite
-29: :primer anyadido
-28:X:segundin
-26: :comeme la poia
-32: :oye qye haces
-33: :tu mas
-34:X:Dalas Review
-34: :Vegetta
-33: :87
-34:X:88
-29:X:pene
-35:X:noventa y dos
-36: :oye
-37:X:tu
-37:X:que
-36: :aces
+25: :primer anyadido
+24:X:segundin
+22: :comeme la poia
+28: :tu mas
+29:X:Dalas Review
+29: :Vegetta
+28: :87
+29:X:88
+25:X:pene
+30:X:noventa y dos
+31: :oye
+32:X:tu
+32:X:que
+31: :aces
+35: :woo, que tengo 90
+34: :pene
+34:X:pollo
+35: :ey you
+18:X:w

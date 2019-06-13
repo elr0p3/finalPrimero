@@ -34,7 +34,7 @@ void pedirNumeroCC(int *numero, char *cadena, int minimo)
         printf("\nIntroduce el numero que deseas %s: ", cadena);
         fflush(stdin);
         scanf("%d", numero);
-        
+
         if(*numero < minimo)
             errorPosicionCC(numero);
     }while(*numero < minimo);
@@ -100,7 +100,7 @@ void pedirNombreCorreos(info_correos *corr, int *long_corr, int max_corr, int in
 
                 default:
                     errorComandoDesconocido();
-            }        
+            }
         }while(corr[i].leido != ' ' && corr[i].leido != 'X');
         if(corr[i].contenido.longitud > *long_corr)//2. En caso de que la longitud del nuevo nombre es mayor que el mayor actual
             *long_corr = corr[i].contenido.longitud;
@@ -115,7 +115,7 @@ void meterCorreosACarpetas(info_carpetas *carp, info_correos *corr, int max_carp
 
     printf("Introduce los correos en carpetas:\n");
     carpetasExistentes(carp, &max_carp);
-    
+
     for(i = inicio_corr; i < max_corr; i++){
         do{
             printf("\nCorreo [ ");
@@ -124,18 +124,18 @@ void meterCorreosACarpetas(info_carpetas *carp, info_correos *corr, int max_carp
             printf(" ]: ");
             fflush(stdin);
             scanf("%d", &(corr[i].tipo_carpeta));
-            
+
             if(corr[i].tipo_carpeta < 0 || corr[i].tipo_carpeta >= max_carp)
                 errorPosicionCC(&(corr[i].tipo_carpeta));
         }while(corr[i].tipo_carpeta < 0 || corr[i].tipo_carpeta >= max_carp);
-        
+
         carp[corr[i].tipo_carpeta].numero_correos++;
     }
 }
 
 
 void liberar(info_carpetas *carp, int num_carp, info_correos *corr, int total_corr)
-{/*Funcion que permite liberar, al final del programa, el espacio reservado por malloc, y evita fallos ¯\_(ツ)_/¯*/
+{/*Funcion que permite liberar, al final del programa, el espacio reservado por malloc, y evita fallos �\_(:D)_/�*/
     int i = 0;
 
     for(i = 0; i < total_corr; i++)

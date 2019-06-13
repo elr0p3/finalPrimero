@@ -24,6 +24,7 @@ void errorAccederCarp(int *);
 void errorPosicionCC(int *);
 void errorArchivo(char *);
 void errorTamanyo(int *);
+void errorSinDatos();
 
 
 #endif /* ERRORES_H */
